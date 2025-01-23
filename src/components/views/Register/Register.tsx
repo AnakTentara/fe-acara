@@ -4,6 +4,7 @@ import Link from "next/link";
 import useRegister from "./useRegister";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Controller } from "react-hook-form";
+import { cn } from "@/utils/cn";
 
 const Register = () => {
     const { visiblePassword, handleVisiblePassword, control, handleSubmit, handleRegister, isPendingRegister, errors } = useRegister();
@@ -19,10 +20,17 @@ const Register = () => {
                     <p className="text-small mb-4">Have an account?&nbsp;
                         <Link href="/auth/login" className="font-semibold text-danger-400">login here</Link>
                     </p>
-                    <form className="flex w-80 flex-col gap-1" onSubmit={handleSubmit(handleRegister)}>
-                        <Controller name="fullName"
-                        control={control}
-                        render={({ field }) => (
+                    {errors.root && (
+                        <p className="text-danger font-medium mb-2">{errors?.root?.message}</p>
+                    )}
+                    <form 
+                        className={cn("flex w-80 flex-col", Object.keys(errors).length > 0 ? "gap-2" : "gap-4")}
+                        onSubmit={handleSubmit(handleRegister)}
+                        >
+                        <Controller
+                            name="fullName"
+                            control={control}
+                            render={({ field }) => (
                             <Input
                                 {...field}
                                 type="text"
@@ -96,7 +104,7 @@ const Register = () => {
                                             type="button"
                                             onClick={() => handleVisiblePassword("confirmPassword")}
                                         >
-                                            {visiblePassword.password ? <FaEye className="pointer-events-none text-xl text-default-400" /> : <FaEyeSlash className="pointer-events-none text-xl text-default-400" />}
+                                            {visiblePassword.confirmPassword ? <FaEye className="pointer-events-none text-xl text-default-400" /> : <FaEyeSlash className="pointer-events-none text-xl text-default-400" />}
                                         </button>
                                 } />
                             )}>
