@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 const RegisterSuccess = () => {
     const router = useRouter();
     return (
-        <div className="flex w-screen flex-col items-center justify-center gap-10 p-4">
+        <div className="flex flex-col items-center justify-center gap-10 p-4">
             <div className="flex flex-col items-center justify-center gap-10">
                 <Image src="/images/general/logo-black.png" alt="logo" width={180} height={180} />
-                <Image src="/images/illustration/success.svg" className="w-2/3 lg:w-full" alt="success" width={50} height={50} />
+                <Image src="/images/illustration/email-send.svg" className="w-1/2 lg:w-1/2" alt="success" width={50} height={50} />
             </div>
             <div className="flex flex-col items-center justify-center gap-10">
             <h1 className="text-3xl font-bold text-danger-500">Create Account Success</h1>
