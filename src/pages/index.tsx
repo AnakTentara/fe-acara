@@ -10,8 +10,8 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       <PageHead title="Haikal Devlop"/>
-      <Button color="primary" href="/member">Open Member Dashboard</Button>
-      <Button color="primary" href="/admin">Open Admin Dashboard</Button>
+      <Button color="primary"><a href="/member">Open Member Dashboard</a></Button>
+      <Button color="primary"><a href="/admin">Open Admin Dashboard</a></Button>
     </main>
   );
-}
+};

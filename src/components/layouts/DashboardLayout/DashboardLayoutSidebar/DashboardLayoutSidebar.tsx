@@ -22,15 +22,15 @@ const DashboardLayoutSidebar = (props: PropTypes) => {
   const router = useRouter();
   return (
     <div className={cn(
-        "fixed lg:relative z-50 flex h-screen w-full max-w-[300px] -translate-x-full flex-col justify-between border-r-1 border-default-200 bg-white px-4 py-6 transition-all lg:-translate-x-0",
+        "fixed lg:relative z-50 flex h-screen w-full max-w-[250px] -translate-x-full flex-col justify-between border-r-1 border-default-200 bg-white px-4 py-6 transition-all lg:-translate-x-0",
         {"translate-x-0" : isOpen}
     )}>
       <div className="flex justify-center w-full">
         <Image
           src="/images/general/logo-black.png"
           alt="logo"
-          width={180}
-          height={60}
+          width={210}
+          height={70}
           className="mb-6 w-32"
           onClick={() => router.push("/")}
         />
