@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Spinner, Button, Input, Card, CardBody } from "@nextui-org/react";
+import { Spinner, Button, Input, Card, CardBody } from "@heroui/react";
 import Link from "next/link";
 import useRegister from "./useRegister";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";

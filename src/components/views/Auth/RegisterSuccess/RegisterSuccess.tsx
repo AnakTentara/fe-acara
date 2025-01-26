@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { useRouter } from "next/router";
 
 const RegisterSuccess = () => {
