@@ -14,8 +14,7 @@ import {
 } from "@heroui/react";
 import { ChangeEvent, Key, ReactNode, useMemo } from "react";
 import { CiSearch } from "react-icons/ci";
-import LIMIT_LISTS from "@/constants/list.constants";
-import { base } from "framer-motion/client";
+import { LIMIT_LISTS } from "@/constants/list.constants";
 import { cn } from "@/utils/cn";
 
 interface PropTypes {
@@ -36,6 +35,7 @@ interface PropTypes {
 }
 
 const DataTable = (props: PropTypes) => {
+
   const {
     buttonTopContentLabel,
     columns,
@@ -58,14 +58,19 @@ const DataTable = (props: PropTypes) => {
       <div className="flox-col-reverse flex items-start justify-between gap-y-4 lg:flex-row lg:items-center">
         <Input
           isClearable
-          className="w-full sm:max-w-[24%]"
+          color="default"
+          variant="bordered"
+          className="w-full rounded-xl bg-white sm:max-w-[24%]"
           placeholder="Search by Name"
           startContent={<CiSearch />}
           onClear={onClearSearch}
           onChange={onChangeSearch}
         />
         {buttonTopContentLabel && (
-          <Button color="danger" onPress={onClickButtonTopContent}>
+          <Button
+            color="danger"
+            onPress={onClickButtonTopContent}
+          >
             {buttonTopContentLabel}
           </Button>
         )}
@@ -80,29 +85,40 @@ const DataTable = (props: PropTypes) => {
 
   const BottomContent = useMemo(() => {
     return (
-      <div className="flex items-center justify-center px-2 py-2 lg:justify-between">
+      <div className="flex items-center justify-center py-2 lg:justify-between">
         <Select
-          className="hidden max-w-36 lg:block"
+          className="hidden max-w-36 rounded-xl bg-white lg:block"
+          variant="bordered"
           size="md"
           selectedKeys={[limit]}
           selectionMode="single"
           onChange={onChangeLimit}
           startContent={<p className="text-small">Show:</p>}
+          disallowEmptySelection
         >
           {LIMIT_LISTS.map((item) => (
-            <SelectItem key={item.value} value={item.value}>
+            <SelectItem
+              variant="bordered"
+              className="rounded-xl bg-white"
+              key={item.value}
+              value={item.value}
+            >
               {item.label}
             </SelectItem>
           ))}
         </Select>
-        <Pagination
-          isCompact
-          showControls
-          color="danger"
-          page={currentPage}
-          total={totalPages}
-          onChange={onChangePage}
-        />
+        {totalPages > 1 && (
+          <Pagination
+            className="rounded-xl"
+            isCompact
+            showControls
+            variant="faded"
+            color="danger"
+            page={currentPage}
+            total={totalPages}
+            onChange={onChangePage}
+          />
+        )}
       </div>
     );
   }, [limit, currentPage, totalPages, onChangeLimit, onChangePage]);
