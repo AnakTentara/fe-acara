@@ -1,12 +1,12 @@
 import DataTable from "@/components/ui/DataTable";
-import { Tooltip } from "@heroui/react";
+import { Tooltip, useDisclosure } from "@heroui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { Key, ReactNode, useCallback, useEffect } from "react";
 import { COLUMN_LIST_CATEGORY } from "./Category.constants";
 import { FiDelete, FiEye } from "react-icons/fi";
 import useCategory from "./useCategory";
-import InputFile from "@/components/ui/InputFile";
+import AddCategoryModal from "./AddCategoryModal";
 
 const Category = () => {
   const { push, isReady, query } = useRouter();
@@ -15,6 +15,7 @@ const Category = () => {
     currentLimit,
     dataCategory,
     isRefetchingCategory,
+    refetchCategory,
     isLoadingCategory,
     setURL,
     handleChangeLimit,
@@ -22,6 +23,8 @@ const Category = () => {
     handleSearch,
     handleClearSearch,
   } = useCategory();
+
+  const addCategoryModal = useDisclosure();
 
   useEffect(() => {
     if (isReady) {
@@ -87,12 +90,14 @@ const Category = () => {
           onChangeSearch={handleSearch}
           onClearSearch={handleClearSearch}
           renderCell={renderCell}
-          onClickButtonTopContent={() => {}}
+          onClickButtonTopContent={addCategoryModal.onOpen}
           totalPages={dataCategory?.pagination.totalPages}
         />
       )}
-
-      <InputFile name="input" isDropable/>
+      <AddCategoryModal
+        refetchCategory={refetchCategory}
+        {...addCategoryModal}
+      />
     </section>
   );
 };
