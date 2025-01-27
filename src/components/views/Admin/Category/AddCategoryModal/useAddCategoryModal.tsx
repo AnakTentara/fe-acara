@@ -11,7 +11,7 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   name: yup.string().required("Please input Name"),
   description: yup.string().required("Please input description"),
-  icon: yup.mixed<FileList>().required("Please input icon"),
+  icon: yup.mixed<FileList | string>().required("Please input icon"),
 });
 
 const useAddCategoryModal = () => {
@@ -34,6 +34,7 @@ const useAddCategoryModal = () => {
         data: { secure_url: icon },
       },
     } = await uploadServices.uploadFile(formData);
+    
     return { name: data.name, description: data.description, icon };
   };
 
@@ -78,6 +79,7 @@ const useAddCategoryModal = () => {
     });
 
   const handleAddCategory = (data: ICategoryForm) => mutateAddFile(data);
+  
   return {
     control,
     errors,

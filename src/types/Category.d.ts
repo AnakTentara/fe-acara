@@ -6,7 +6,7 @@ interface ICategory {
 };
 
 interface ICategoryForm extends ICategory {
-    icon: FileList;
+    icon: FileList | string;
 };
 
 export type { ICategory, ICategoryForm };
