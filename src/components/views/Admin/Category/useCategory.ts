@@ -2,10 +2,11 @@ import { useRouter } from "next/router";
 import { DELAY, LIMIT_DEFAULT, PAGE_DEFAULT } from "@/constants/list.constants";
 import categoryServices from "@/services/category.service";
 import { useQuery } from "@tanstack/react-query";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import useDebound from "@/hooks/useDebounce";
 
 const useCategory = () => {
+  const [selectedId, setSelectedId] = useState<string>("");
   const router = useRouter();
   const debounce = useDebound();
   const currentLimit = router.query.limit;
@@ -99,6 +100,8 @@ const useCategory = () => {
     currentPage,
     currentLimit,
     currentSearch,
+    selectedId,
+    setSelectedId,
   };
 };
 

@@ -7,6 +7,7 @@ import { COLUMN_LIST_CATEGORY } from "./Category.constants";
 import { FiDelete, FiEye } from "react-icons/fi";
 import useCategory from "./useCategory";
 import AddCategoryModal from "./AddCategoryModal";
+import DeleteCategoryModal from "./DeleteCategoryModal";
 
 const Category = () => {
   const { push, isReady, query } = useRouter();
@@ -22,9 +23,12 @@ const Category = () => {
     handleChangePage,
     handleSearch,
     handleClearSearch,
+    selectedId,
+    setSelectedId,
   } = useCategory();
 
   const addCategoryModal = useDisclosure();
+  const deleteCategoryModal = useDisclosure();
 
   useEffect(() => {
     if (isReady) {
@@ -62,6 +66,10 @@ const Category = () => {
                   <FiDelete
                     key="delete-category-button"
                     className="text-danger-500"
+                    onClick={() => {
+                      setSelectedId(`${category._id}`);
+                      deleteCategoryModal.onOpen();
+                    }}
                   />
                 </span>
               </Tooltip>
@@ -97,6 +105,12 @@ const Category = () => {
       <AddCategoryModal
         refetchCategory={refetchCategory}
         {...addCategoryModal}
+      />
+      <DeleteCategoryModal
+        refetchCategory={refetchCategory}
+        {...deleteCategoryModal}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
       />
     </section>
   );

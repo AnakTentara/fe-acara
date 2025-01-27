@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/layouts/DashboardLayout/DashboardLayoutSidebar/index.tss"
-  ],
+, "src/components/views/Admin/Category/DeleteCategoryModal/DeleteCategoryModal.tss"  ],
   "exclude": [
     "node_modules"
   ]
