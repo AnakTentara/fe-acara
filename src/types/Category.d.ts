@@ -1,8 +1,8 @@
 interface ICategory {
     _id?: string;
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     icon?: string | FilList;
 };
 
-export type { ICategory, ICategoryForm };
+export type { ICategory };

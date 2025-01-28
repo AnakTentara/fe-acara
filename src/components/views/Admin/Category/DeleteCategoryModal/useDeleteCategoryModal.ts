@@ -7,7 +7,7 @@ const useDeleteCategoryModal = () => {
   const { setToaster } = useContext(ToasterContext);
 
   const deleteCategory = async (id: string) => {
-    const res = await categoryServices.deleteCategories(id);
+    const res = await categoryServices.deleteCategory(id);
     return res;
   };
 
