@@ -21,7 +21,12 @@ const DetailCategory = () => {
         />
       </Tab>
       <Tab key="info" title="Info">
-        <InfoTab dataCategory={dataCategory} />
+        <InfoTab
+          dataCategory={dataCategory}
+          onUpdate={handleUpdateCategory}
+          isPendingUpdate={isPendingMutateUpdateCategory}
+          isSuccessUpdate={isSuccessMutateUpdateCategory}
+        />
       </Tab>
     </Tabs>
   );

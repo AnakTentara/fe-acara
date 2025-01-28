@@ -8,31 +8,27 @@ import { FiDelete, FiEye } from "react-icons/fi";
 import useCategory from "./useCategory";
 import AddCategoryModal from "./AddCategoryModal";
 import DeleteCategoryModal from "./DeleteCategoryModal";
+import useChangeUrl from "@/hooks/useChangeUrl";
+import Actions from "@/components/commons/Actions";
 
 const Category = () => {
   const { push, isReady, query } = useRouter();
   const {
-    currentPage,
-    currentLimit,
     dataCategory,
     isRefetchingCategory,
     refetchCategory,
     isLoadingCategory,
-    setURL,
-    handleChangeLimit,
-    handleChangePage,
-    handleSearch,
-    handleClearSearch,
     selectedId,
     setSelectedId,
   } = useCategory();
 
   const addCategoryModal = useDisclosure();
   const deleteCategoryModal = useDisclosure();
+  const { setUrl } = useChangeUrl();
 
   useEffect(() => {
     if (isReady) {
-      setURL();
+      setUrl();
     }
   }, [isReady]);
 
@@ -52,28 +48,7 @@ const Category = () => {
           );
         case "actions":
           return (
-            <div className="relative flex items-center gap-2">
-              <Tooltip content="Details">
-                <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                  <FiEye
-                    key="detail-category-button"
-                    onClick={() => push(`/admin/category/${category._id}`)}
-                  />
-                </span>
-              </Tooltip>
-              <Tooltip color="danger" content="Delete Category">
-                <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                  <FiDelete
-                    key="delete-category-button"
-                    className="text-danger-500"
-                    onClick={() => {
-                      setSelectedId(`${category._id}`);
-                      deleteCategoryModal.onOpen();
-                    }}
-                  />
-                </span>
-              </Tooltip>
-            </div>
+            <Actions onClickDetail={() => {}} onClickDelete={() => {}} />
           );
         default:
           return cellValue as ReactNode;
@@ -88,15 +63,9 @@ const Category = () => {
         <DataTable
           buttonTopContentLabel="Create Category"
           columns={COLUMN_LIST_CATEGORY}
-          currentPage={Number(currentPage)}
           data={dataCategory?.data || []}
           emptyContent="Category is Empty"
           isLoading={isLoadingCategory || isRefetchingCategory}
-          limit={String(currentLimit)}
-          onChangeLimit={handleChangeLimit}
-          onChangePage={handleChangePage}
-          onChangeSearch={handleSearch}
-          onClearSearch={handleClearSearch}
           renderCell={renderCell}
           onClickButtonTopContent={addCategoryModal.onOpen}
           totalPages={dataCategory?.pagination.totalPages}

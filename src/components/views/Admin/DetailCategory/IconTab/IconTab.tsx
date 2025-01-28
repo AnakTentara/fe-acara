@@ -1,13 +1,14 @@
 import InputFile from "@/components/ui/InputFile";
-import { Button, Card, CardBody, CardHeader, Skeleton } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Skeleton, Spinner } from "@heroui/react";
 import Image from "next/image";
 import useIconTab from "./useIconTab";
 import { Controller } from "react-hook-form";
 import { useEffect } from "react";
+import { ICategory } from "@/types/Category";
 
 interface PropTypes {
   currentIcon: string;
-  onUpdate: (data: { icon: FileList | string }) => void;
+  onUpdate: (data: ICategory) => void;
   isPendingUpdate: boolean;
   isSuccessUpdate: boolean;
 }
@@ -41,7 +42,7 @@ const IconTab = (props: PropTypes) => {
         </p>
       </CardHeader>
       <CardBody>
-        <form className="flex flex-col gap-4" onSubmit={() => {}}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmitUpdateIcon(onUpdate)}>
           <div className="flex flex-col gap-2">
             <p className="text-sm font-medium text-default-700">
               Upload New Icon
@@ -77,7 +78,7 @@ const IconTab = (props: PropTypes) => {
             type="submit"
             disabled={isPendingMutateUploadFile || isPendingUpdate}
           >
-            Save Changes
+            {isPendingUpdate ? <Spinner size="sm" color="white"/> : "Save Changes"}
           </Button>
         </form>
       </CardBody>

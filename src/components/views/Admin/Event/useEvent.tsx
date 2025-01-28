@@ -1,43 +1,43 @@
 import { useRouter } from "next/router";
-import categoryServices from "@/services/category.service";
+import eventServices from "@/services/event.service";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useChangeUrl from "@/hooks/useChangeUrl";
 
-const useCategory = () => {
+const useEvent = () => {
   const [selectedId, setSelectedId] = useState<string>("");
   const router = useRouter();
   const {currentLimit, currentPage, currentSearch} = useChangeUrl();
 
-  const getCategories = async () => {
+  const getEvents = async () => {
     let params = `limit=${currentLimit}&page=${currentPage}`;
     if (currentSearch) {
       params += `&search=${currentSearch}`;
     }
-    const res = await categoryServices.getCategories(params);
+    const res = await eventServices.getEvents(params);
     const { data } = res;
     return data;
   };
 
   const {
-    data: dataCategory,
-    isLoading: isLoadingCategory,
-    isRefetching: isRefetchingCategory,
-    refetch: refetchCategory,
+    data: dataEvents,
+    isLoading: isLoadingEvents,
+    isRefetching: isRefetchingEvents,
+    refetch: refetchEvent,
   } = useQuery({
-    queryKey: ["Categories", currentPage, currentLimit, currentSearch],
-    queryFn: () => getCategories(),
+    queryKey: ["Events", currentPage, currentLimit, currentSearch],
+    queryFn: () => getEvents(),
     enabled: router.isReady && !!currentPage && !!currentLimit,
   });
 
   return {
-    dataCategory,
-    isLoadingCategory,
-    isRefetchingCategory,
-    refetchCategory,
+    dataEvents,
+    isLoadingEvents,
+    isRefetchingEvents,
+    refetchEvent,
     selectedId,
     setSelectedId,
   };
 };
 
-export default useCategory;
+export default useEvent;
